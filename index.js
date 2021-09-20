@@ -18,7 +18,6 @@ const options = {
       email: "jake_nordon@okrs.tech",
       firstName: "Jake",
       lastName: "Nordon",
-      userName: "test",
     },
   ),
 };
