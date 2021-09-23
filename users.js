@@ -5,13 +5,14 @@ const baseUrl = "https://app.gtmhub.com/api/v1/users";
 const apiToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL2d0bWh1Yi5jb20vYXBwX21ldGFkYXRhL2FjY291bnRJZCI6IjYxNDQ0YTEwZjdmZmUxMDAwMWY3NWI2NiIsImlhdCI6MTYzMTg2NTM2MSwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMTUwNjc3Nzc1NzMzMTQxMDk5MjgifQ.0zZZS1ixt1srNU-XcEcUqoaJep0H64-YRInCCbUi6_8";
 const accountId = "61444a10f7ffe10001f75b66";
 
-const wb = xlsx.readFile('users.xlsx');
-const ws = wb.Sheets['users'];
-const data = xlsx.utils.sheet_to_json(ws);
+const wb = xlsx.readFile('Users_OKRs_Data.xlsx');
+const ws = wb.Sheets['Users'];
+const users = xlsx.utils.sheet_to_json(ws);
 
-let [obj1, obj2, obj3] = data;
+let [firstUser, secondUser, thirdUser,] = users;
 
-const options1 = {
+
+const firstUserOptions = {
   method: "POST",
   headers: {
     Authorization: `Bearer ${apiToken}`,
@@ -20,10 +21,10 @@ const options1 = {
     Accept: "application/json, text/plain, */*",
     
   },
-  body: JSON.stringify(obj1),
+  body: JSON.stringify(firstUser),
 };
 
-const options2 = {
+const secondUserOptions = {
   method: "POST",
   headers: {
     Authorization: `Bearer ${apiToken}`,
@@ -31,10 +32,10 @@ const options2 = {
     "Content-type": "application/json; charset=UTF-8",
     Accept: "application/json, text/plain, */*",
   },
-  body: JSON.stringify(obj2),
+  body: JSON.stringify(secondUser),
 };
 
-const options3 = {
+const thirdUserOptions = {
   method: "POST",
   headers: {
     Authorization: `Bearer ${apiToken}`,
@@ -42,7 +43,7 @@ const options3 = {
     "Content-type": "application/json; charset=UTF-8",
     Accept: "application/json, text/plain, */*",
   },
-  body: JSON.stringify(obj3),
+  body: JSON.stringify(thirdUser),
 };
 
 const createUser = (url, options) => {
@@ -50,7 +51,7 @@ const createUser = (url, options) => {
 };
 
 (async () => {
-  const promises = createUser(baseUrl, [options1, options2, options3]);
+  const promises = createUser(baseUrl, [firstUserOptions, secondUserOptions, thirdUserOptions]);
 
   try {
     const rc = await Promise.all(promises);
